@@ -1,0 +1,1 @@
+This folder is the info file for the textures folder in PacMan-Game/textures.
