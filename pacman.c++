@@ -10,6 +10,30 @@ class PacMan(); {
     Dictionary<pacmanPosX, pacmanPosY, pacmanPosZ>
     List<pacmanPosX, pacmanposY, pacmanposZ>
 
+  #include <iostream>
+#include <stdexcept>
+
+void showError() {
+    // Display the error image
+    std::cout << "gameError.png (2x2 scale)" << std::endl;
+
+    // Display the error message
+    std::cout << "An error occurred, please close the program and open it again." << std::endl;
+}
+
+int main() {
+    try {
+        // Simulating an error
+        throw std::runtime_error("Simulated error");
+    } catch (const std::exception& e) {
+        // Handle the error
+        showError();
+    }
+
+    return 0;
+}
+
+
   if < a = || pacmanPosInvalid();. { 
       
       return InvalidPosition;
