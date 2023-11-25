@@ -52,6 +52,37 @@ int main() {
 #include <filesystem>
 
 #include <textures/>
+
+
+#include <boost/asio.hpp>
+
+void handleFileUpload(const boost::system::error_code& error, std::size_t bytes_transferred) {
+    if (!error) {
+        // File upload successful, proceed with validation and execution
+    } else {
+        // Handle file upload error
+    }
+}
+
+int main() {
+    boost::asio::io_context io_context;
+    boost::asio::ip::tcp::acceptor acceptor(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 8080));
+
+    boost::asio::ip::tcp::socket socket(io_context);
+    acceptor.accept(socket);
+
+    boost::asio::async_write(socket, boost::asio::buffer("Upload your .ZIP file"), handleFileUpload);
+
+    io_context.run();
+
+    return 0;
+}
+
+
+
+
+  
+  
   
 namespace fs = std::filesystem;
 
