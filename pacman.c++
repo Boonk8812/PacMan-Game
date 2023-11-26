@@ -197,38 +197,40 @@ int main() {
     return 0;
 }
 
+#include <iostream>
+#include <android/input.h>
+
+void handleTouchEvent(AInputEvent* event) {
+    // Handle touch event here
+    // Extract touch coordinates and perform Pac-Man control logic
+}
+
+void handleKeyEvent(AInputEvent* event) {
+    // Handle key event here
+    // Extract key code and perform Pac-Man control logic
+}
+
 int main() {
-    char input;
+    // Initialize Android NDK and input manager
+    AInputManager* inputManager = AInputManager_getInstance();
 
+    // Main loop to handle input events
     while (true) {
-        if (_kbhit()) {
-            input = _getch();
+        // Get next input event
+        AInputEvent* event = AInputManager_getNextEvent(inputManager);
 
-            switch (input) {
-                case 'w':
-                case 'W':
-                case 72: // Up Arrow
-                    // Move PacMan up
-                    break;
-                case 'a':
-                case 'A':
-                case 75: // Left Arrow
-                    // Move PacMan left
-                    break;
-                case 's':
-                case 'S':
-                case 80: // Down Arrow
-                    // Move PacMan down
-                    break;
-                case 'd':
-                case 'D':
-                case 77: // Right Arrow
-                    // Move PacMan right
-                    break;
-                default:
-                    break;
-            }
+        // Check event type
+        int32_t eventType = AInputEvent_getType(event);
+        if (eventType == AINPUT_EVENT_TYPE_MOTION) {
+            // Touch event
+            handleTouchEvent(event);
+        } else if (eventType == AINPUT_EVENT_TYPE_KEY) {
+            // Key event
+            handleKeyEvent(event);
         }
+
+        // Release event resources
+        AInputEvent_release(event);
     }
 
     return 0;
