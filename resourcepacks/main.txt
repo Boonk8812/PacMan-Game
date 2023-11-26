@@ -1,0 +1,1 @@
+This folder would be where you place mod .modpkg file or texture packs (.zip files).
